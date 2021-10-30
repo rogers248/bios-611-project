@@ -15,3 +15,6 @@ Create a docker image through the code: docker build . -f /Users/moyi/Desktop/Do
 Step3:
 To use Rstudio, write the following codes in terminal
 docker run -v /$(pwd):/home/rstudio/work -e PASSWORD=12345 --rm -p 8787:8787 tianyi
+
+
+Shiny
