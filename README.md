@@ -17,6 +17,7 @@ Name the new image tianyi.
 
 ## Step3:
 To use Rstudio, write the following codes in terminal
+
 ```docker run -v /$(pwd):/home/rstudio/work -e PASSWORD=12345 --rm -p 8787:8787 tianyi```
 
 
