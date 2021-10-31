@@ -21,3 +21,10 @@ Name the new image tianyi.
 To use Rstudio, write the following codes in terminal
 
 ```docker run -v /$(pwd):/home/rstudio/work -e PASSWORD=12345 --rm -p 8787:8787 tianyi```
+
+## Makefile
+The makefile will help build components of the report. To build figures, run the command in Rstudio terminal:
+```make Figures/<figurename>.png```
+
+To build the final report, run in Rstudio terminal:
+```make report.pdf```
