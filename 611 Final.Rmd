@@ -1,0 +1,176 @@
+---
+title: "611 Final Project"
+author: "Tianyi Wang"
+date: "11/9/2021"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(lubridate)
+library(dplyr)
+library(DT)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# wrangling the data
+rm(list=ls())
+
+fillColor = "#FFA07A"
+fillColor2 = "#F1C40F"
+
+meets = read_csv("/Users/moyi/Desktop/powerliftingdata.csv")
+powerlifting = read_csv("/Users/moyi/Desktop/powerlifting2015-2019.csv")
+openpowerlifting= read_csv("/Users/moyi/Desktop/openpowerlifting.csv")
+
+
+datatable(head(meets), style="bootstrap", class="table-condensed", options = list(dom = 'tp',scrollX = TRUE))
+datatable(head(powerlifting), style="bootstrap", class="table-condensed", options = list(dom = 'tp',scrollX = TRUE))
+
+
+# Country and Meets Data
+
+```{r}
+meets %>%
+  group_by(MeetCountry) %>%
+  summarise(Count = n()) %>%
+  arrange(desc(Count)) %>%
+  ungroup() %>%
+  mutate(Country = reorder(MeetCountry,Count)) %>%
+  head(10) %>%
+  
+  ggplot(aes(x = Country,y = Count)) +
+  geom_bar(stat='identity',colour="white", fill = fillColor) +
+  geom_text(aes(x = Country, y = 1, label = paste0("(",Count,")",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = 'black',
+            fontface = 'bold') +
+  labs(x = 'Country', 
+       y = 'Count', 
+       title = 'Country and Count') +
+  coord_flip() +
+  theme_bw()
+```
+
+
+# Most Common Weight Class Kg among Men
+
+```{r}
+powerlifting %>%
+  filter(Sex == "M") %>%
+  group_by(WeightClassKg) %>%
+  summarise(Count =  n()) %>%
+  ungroup() %>%
+  mutate(WeightClassKg = reorder(WeightClassKg,Count)) %>%
+  arrange(desc(Count)) %>%
+  head(10) %>%
+  
+  ggplot(aes(x = WeightClassKg,y = Count)) +
+  geom_bar(stat='identity',colour="white", fill = fillColor2) +
+  geom_text(aes(x = WeightClassKg, y = 1, label = paste0(" ",Count," ",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = 'black',
+            fontface = 'bold') +
+  labs(x = 'Weight Class Kg', 
+       y = 'Count', 
+       title = 'Weight Class Kg and Count') +
+  coord_flip() +
+  theme_bw()
+```
+
+
+# Most Common Division among 100 kg Men Category
+
+```{r}
+powerlifting %>%
+  filter(Sex == "M" & WeightClassKg == 100 & !is.na(Division)) %>%
+  group_by(Division) %>%
+  summarise(Count =  n()) %>%
+  ungroup() %>%
+  mutate(Division = reorder(Division,Count)) %>%
+  arrange(desc(Count)) %>%
+  head(10) %>%
+  
+  ggplot(aes(x = Division,y = Count)) +
+  geom_bar(stat='identity',colour="white", fill = fillColor2) +
+  geom_text(aes(x = Division, y = 1, label = paste0(" ",Count," ",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = 'black',
+            fontface = 'bold') +
+  labs(x = 'Division', 
+       y = 'Count', 
+       title = 'Most Common Division among 100 kg Men Category') +
+  coord_flip() +
+  theme_bw()
+```
+
+
+# Most Common Weight Class Kg among Women
+
+```{r}
+powerlifting %>%
+  filter(Sex == "F") %>%
+  group_by(WeightClassKg) %>%
+  summarise(Count =  n()) %>%
+  ungroup() %>%
+  mutate(WeightClassKg = reorder(WeightClassKg,Count)) %>%
+  arrange(desc(Count)) %>%
+  head(10) %>%
+  
+  ggplot(aes(x = WeightClassKg,y = Count)) +
+  geom_bar(stat='identity',colour="white", fill = fillColor) +
+  geom_text(aes(x = WeightClassKg, y = 1, label = paste0(" ",Count," ",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = 'black',
+            fontface = 'bold') +
+  labs(x = 'Weight Class Kg', 
+       y = 'Count', 
+       title = 'Weight Class Kg and Count') +
+  coord_flip() +
+  theme_bw()
+```
+
+# The Wilks Coefficient or Wilks Formula is a coefficient that can be used to measure the strength of a powerlifter against other powerlifters despite the different weights of the lifters. Robert Wilks, CEO of Powerlifting Australia, is the author of the formula.
+## We plot the highest Wilks for women
+
+```{r}
+powerlifting %>%
+  filter(Sex == "F") %>%
+  group_by(Name) %>%
+  summarise(BestWilks =  median(Wilks,na.rm =TRUE)) %>%
+  ungroup() %>%
+  mutate(Name = reorder(Name,BestWilks)) %>%
+  arrange(desc(BestWilks)) %>%
+  head(10) %>%
+  
+  ggplot(aes(x = Name,y = BestWilks)) +
+  geom_bar(stat='identity',colour="white", fill = fillColor2) +
+  geom_text(aes(x = Name, y = 1, label = paste0(" ",round(BestWilks)," ",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = 'black',
+            fontface = 'bold') +
+  labs(x = 'Name', 
+       y = 'Wilks ', 
+       title = 'Name and Wilks') +
+  coord_flip() +
+  theme_bw() 
+```
+
+## We plot the highest Wilks for men
+
+```{r}
+powerlifting %>%
+  filter(Sex == "M") %>%
+  group_by(Name) %>%
+  summarise(BestWilks =  median(Wilks,na.rm =TRUE)) %>%
+  ungroup() %>%
+  mutate(Name = reorder(Name,BestWilks)) %>%
+  arrange(desc(BestWilks)) %>%
+  head(10) %>%
+  
+  ggplot(aes(x = Name,y = BestWilks)) +
+  geom_bar(stat='identity',colour="white", fill = fillColor) +
+  geom_text(aes(x = Name, y = 1, label = paste0(" ",round(BestWilks)," ",sep="")),
+            hjust=0, vjust=.5, size = 4, colour = 'black',
+            fontface = 'bold') +
+  labs(x = 'Name', 
+       y = 'Wilks ', 
+       title = 'Name and Wilks') +
+  coord_flip() +
+  theme_bw() 
+```
