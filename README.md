@@ -3,7 +3,7 @@
 ## *Analysis of Powerlifting Database*
 ### Introduction
 
-This dataset is a snapshot of the OpenPowerlifting database as of February 2018. OpenPowerlifting is an organization which tracks meets and competitor results in the sport of powerlifting, in which competitors complete to lift the most weight for their class in three separate weightlifting categories.
+This dataset is a snapshot of the OpenPowerlifting database as of 2015 to 2019. OpenPowerlifting is an organization which tracks meets and competitor results in the sport of powerlifting, in which competitors complete to lift the most weight for their class in three separate weightlifting categories. I'm using the data from it to make some deeper analysis in the powerlift field recently.
 
 
 ## Docker Use
