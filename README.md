@@ -5,7 +5,8 @@
 
 ![john-hack](https://user-images.githubusercontent.com/91029009/141522571-ba33421b-6c0d-482e-91fe-47ad7c02cf7d.jpeg)
 
-This dataset is a snapshot of the OpenPowerlifting database as of 2015 to 2019. OpenPowerlifting is an organization which tracks meets and competitor results in the sport of powerlifting, in which competitors complete to lift the most weight for their class in three separate weightlifting categories. I'm using the data from it to make some deeper analysis in the powerlift field recently.
+Powerlifting is a strength sport that consists of three attempts at maximal weight on three lifts: squat, bench press, and deadlift.This sport is getting more and more popular around the world. So I decided to start this project to get deeper understanding about powerlifting.
+The dataset is a snapshot of the OpenPowerlifting database as of 2015 to 2019. OpenPowerlifting is an organization which tracks meets and competitor results in the sport of powerlifting, in which competitors complete to lift the most weight for their class in three separate weightlifting categories. I'm using the data from it to make some data analysis in the powerlift field recently.
 
 
 ## Docker Use
