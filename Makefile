@@ -7,9 +7,12 @@ report.pdf:\
  Figures/Country and Meets.png\
  Figures/Men Weight Class.png\
  Figures/Women Weight Class.png\
- Figures/Men Common Division.png\
  Figures/Highest Wilk for Men.png\
- Figures/Highest Wilk for Women.png
+ Figures/Highest Wilk for Women.png\
+ Figures/TotalKg.png\
+ Figures/BestBenchPress.png\
+ Figures/BestDeadlift.png\
+ Figures/BestSquat.png
 	pdflatex report.tex
 
 
@@ -17,6 +20,10 @@ report.pdf:\
 
 #Dataset needed for project & reading it in ############
 powerlifting2015-2019.csv:\
+ Scripts/read_data.R
+	Rscript Scripts/read_data.R
+	
+meets.csv:\
  Scripts/read_data.R
 	Rscript Scripts/read_data.R
   
@@ -40,11 +47,6 @@ Figures/Women Weight Class.png:\
  Scripts/Women Weight Class.R
 	Rscript Scripts/Women Weight Class.R
 	
-Figures/Men Common Division.png:\
- Scripts/read_data.R\
- powerlifting2015-2019.csv\
- Scripts/Men Common Division.R
-	Rscript Scripts/Men Common Division.R
 	
 Figures/Highest Wilk for Men:\
  Scripts/read_data.R\
@@ -57,3 +59,27 @@ Figures/Highest Wilk for Women.png:\
  powerlifting2015-2019.csv\
  Scripts/Highest Wilk for Women.R
 	Rscript Scripts/Highest Wilk for Women.R
+	
+Figures/TotalKg.png:\
+ Scripts/read_data.R\
+ powerlifting2015-2019.csv\
+ Scripts/Relationship between lifted weights and body weights.R
+	Rscript Scripts/Relationship between lifted weights and body weights.R
+	
+Figures/BestBenchPress.png:\
+ Scripts/read_data.R\
+ powerlifting2015-2019.csv\
+ Scripts/Relationship between lifted weights and body weights.R
+	Rscript Scripts/Relationship between lifted weights and body weights.R
+	
+Figures/BestDeadlift.png:\
+ Scripts/read_data.R\
+ powerlifting2015-2019.csv\
+ Scripts/Relationship between lifted weights and body weights.R
+	Rscript Scripts/Relationship between lifted weights and body weights.R
+	
+Figures/BestSquat.png:\
+ Scripts/read_data.R\
+ powerlifting2015-2019.csv\
+ Scripts/Relationship between lifted weights and body weights.R
+	Rscript Scripts/Relationship between lifted weights and body weights.R
