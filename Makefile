@@ -1,6 +1,51 @@
 .PHONY: clean
 SHELL: /bin/bash
 
+clean:
+	rm -f Figures/*
+	rm -f report.pdf
+	
+
+Figures/Country and Meets.png: Data/meets.csv Scripts/Country and Meets.R
+	mkdir -p Figures
+	Rscript Scripts/Country and Meets.R
+
+
+Figures/Men Weight Class.png: Data/powerlifting2015-2019.csv Scripts/Men Weight Class.R
+	mkdir -p Figures
+	Rscript Scripts/Men Weight Class.R
+
+Figures/Women Weight Class.png: Data/powerlifting2015-2019.csv Scripts/Women Weight Class.R
+	mkdir -p Figures
+	Rscript Scripts/Women Weight Class.R
+
+	
+Figures/Highest Wilk for Men.png: Data/powerlifting2015-2019.csv Scripts/Highest Wilk for Men.R
+	mkdir -p Figures
+	Rscript Scripts/Highest Wilk for Men.R
+
+Figures/Highest Wilk for Women.png: Data/powerlifting2015-2019.csv Scripts/Highest Wilk for Women.R
+	mkdir -p Figures
+	Rscript Scripts/Highest Wilk for Women.R
+	
+	
+Figures/TotalKg.png: Data/powerlifting2015-2019.csv Scripts/TotalKg.R
+	mkdir -p Figures
+	Rscript Scripts/Relationship between lifted weights and body weights.R
+
+Figures/BestBenchPress.png: Data/powerlifting2015-2019.csv Scripts/BestBenchPress.R
+	mkdir -p Figures
+	Rscript Scripts/Relationship between lifted weights and body weights.R
+	
+Figures/BestDeadlift.png: Data/powerlifting2015-2019.csv Scripts/BestDeadlift.R
+	mkdir -p Figures
+	Rscript Scripts/Relationship between lifted weights and body weights.R
+	
+Figures/BestSquat.png: Data/powerlifting2015-2019.csv Scripts/BestSquat.R
+	mkdir -p Figures
+	Rscript Scripts/Relationship between lifted weights and body weights.R
+
+	
 #Final report output ##############
 report.pdf:\
  report.tex\
@@ -13,73 +58,4 @@ report.pdf:\
  Figures/BestBenchPress.png\
  Figures/BestDeadlift.png\
  Figures/BestSquat.png
-	pdflatex report.tex
-
-
-
-
-#Dataset needed for project & reading it in ############
-powerlifting2015-2019.csv:\
- Scripts/read_data.R
-	Rscript Scripts/read_data.R
-	
-meets.csv:\
- Scripts/read_data.R
-	Rscript Scripts/read_data.R
-  
-  
-#Data needed for the figures
-Figures/Country and Meets.png:\
- Scripts/read_data.R\
- powerlifting2015-2019.csv\
- Scripts/Country and Meets.R
-	Rscript Scripts/Country and Meets.R
-	
-Figures/Men Weight Class.png:\
- Scripts/read_data.R\
- powerlifting2015-2019.csv\
- Scripts/Men Weight Class.R
-	Rscript Scripts/Men Weight Class.R
-	
-Figures/Women Weight Class.png:\
- Scripts/read_data.R\
- powerlifting2015-2019.csv\
- Scripts/Women Weight Class.R
-	Rscript Scripts/Women Weight Class.R
-	
-	
-Figures/Highest Wilk for Men:\
- Scripts/read_data.R\
- powerlifting2015-2019.csv\
- Scripts/Highest Wilk for Men.R
-	Rscript Scripts/Highest Wilk for Men.R
-	
-Figures/Highest Wilk for Women.png:\
- Scripts/read_data.R\
- powerlifting2015-2019.csv\
- Scripts/Highest Wilk for Women.R
-	Rscript Scripts/Highest Wilk for Women.R
-	
-Figures/TotalKg.png:\
- Scripts/read_data.R\
- powerlifting2015-2019.csv\
- Scripts/Relationship between lifted weights and body weights.R
-	Rscript Scripts/Relationship between lifted weights and body weights.R
-	
-Figures/BestBenchPress.png:\
- Scripts/read_data.R\
- powerlifting2015-2019.csv\
- Scripts/Relationship between lifted weights and body weights.R
-	Rscript Scripts/Relationship between lifted weights and body weights.R
-	
-Figures/BestDeadlift.png:\
- Scripts/read_data.R\
- powerlifting2015-2019.csv\
- Scripts/Relationship between lifted weights and body weights.R
-	Rscript Scripts/Relationship between lifted weights and body weights.R
-	
-Figures/BestSquat.png:\
- Scripts/read_data.R\
- powerlifting2015-2019.csv\
- Scripts/Relationship between lifted weights and body weights.R
-	Rscript Scripts/Relationship between lifted weights and body weights.R
+	R -e "tinytex::pdflatex('report.tex')"
